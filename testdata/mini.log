@@ -1,0 +1,359 @@
+2018-12-24T03:19:20.7750808Z ##[debug]Evaluating condition for step: 'Example Step'
+2018-12-24T03:19:20.7751241Z ##[debug]Evaluating: SucceededNode()
+2018-12-24T03:19:20.7751307Z ##[debug]Evaluating SucceededNode:
+2018-12-24T03:19:20.7751426Z ##[debug]=> True
+2018-12-24T03:19:20.7751559Z ##[debug]Result: True
+2018-12-24T03:19:20.7751679Z ##[section]Starting: Example Step
+2018-12-24T03:19:20.7754130Z ==============================================================================
+2018-12-24T03:19:20.7754197Z Task         : Bash
+2018-12-24T03:19:20.7754248Z Description  : Run a Bash script on macOS, Linux, or Windows
+2018-12-24T03:19:20.7754292Z Version      : 3.142.2
+2018-12-24T03:19:20.7754332Z Author       : Microsoft Corporation
+2018-12-24T03:19:20.7754384Z Help         : [More Information](https://go.microsoft.com/fwlink/?LinkID=613738)
+2018-12-24T03:19:20.7754434Z ==============================================================================
+2018-12-24T03:19:20.8765927Z ##[debug]agent.TempDirectory=/home/example/myagent/_work/_temp
+2018-12-24T03:19:20.8790191Z ##[debug]loading inputs and endpoints
+2018-12-24T03:19:20.8795041Z ##[debug]loading INPUT_TARGETTYPE
+2018-12-24T03:19:20.8803804Z ##[debug]loading INPUT_FILEPATH
+2018-12-24T03:19:20.8807499Z ##[debug]loading INPUT_SCRIPT
+2018-12-24T03:19:20.8811651Z ##[debug]loading INPUT_WORKINGDIRECTORY
+2018-12-24T03:19:20.8811867Z ##[debug]loading INPUT_FAILONSTDERR
+2018-12-24T03:19:20.8828976Z ##[debug]loaded 13
+2018-12-24T03:19:20.8844757Z ##[debug]Agent.ProxyUrl=undefined
+2018-12-24T03:19:20.8844970Z ##[debug]Agent.CAInfo=undefined
+2018-12-24T03:19:20.8845193Z ##[debug]Agent.ClientCert=undefined
+2018-12-24T03:19:20.8845358Z ##[debug]Agent.SkipCertValidation=undefined
+2018-12-24T03:19:20.8860238Z ##[debug]check path : /home/example/myagent/_work/_tasks/Bash_6c731c3c-3c68-459a-a5c9-bde6e6595b5b/3.142.2/task.json
+2018-12-24T03:19:20.8860731Z ##[debug]adding resource file: /home/example/myagent/_work/_tasks/Bash_6c731c3c-3c68-459a-a5c9-bde6e6595b5b/3.142.2/task.json
+2018-12-24T03:19:20.8861114Z ##[debug]system.culture=en-US
+2018-12-24T03:19:20.8876443Z ##[debug]failOnStderr=false
+2018-12-24T03:19:20.8882835Z ##[debug]workingDirectory=/home/example/myagent/_work/1/s/20181223.14/go/src/github.com/terraform-providers/terraform-provider-azurerm
+2018-12-24T03:19:20.8885042Z ##[debug]check path : /home/example/myagent/_work/1/s/20181223.14/go/src/github.com/terraform-providers/terraform-provider-azurerm
+2018-12-24T03:19:20.8885364Z ##[debug]targetType=inline
+2018-12-24T03:19:20.8886033Z ##[debug]script=if [ -d ./azurerm/testdata ]
+then
+  cp -f -r ./azurerm/testdata ./results/testdata
+fi
+
+cd results
+
+cat test_run_list.txt | TF_ACC=1 parallel-go-test -f ../azurerm/test-azurerm -p 20 -t 3600s | tee parallel_test_results.txt
+cat parallel_test_results.txt | go-junit-report --package-name azurerm > parallel_test_junit_report.xml
+2018-12-24T03:19:20.8918295Z Generating script.
+2018-12-24T03:19:20.8921390Z ##[debug]which 'bash'
+2018-12-24T03:19:20.8930597Z ##[debug]found: '/bin/bash'
+2018-12-24T03:19:20.8933088Z ##[debug]which 'bash'
+2018-12-24T03:19:20.8933964Z ##[debug]found: '/bin/bash'
+2018-12-24T03:19:20.8934219Z ##[debug]Agent.Version=2.144.0
+2018-12-24T03:19:20.8934462Z ##[debug]agent.tempDirectory=/home/example/myagent/_work/_temp
+2018-12-24T03:19:20.8934669Z ##[debug]check path : /home/example/myagent/_work/_temp
+2018-12-24T03:19:20.8953189Z ##[debug]which '/bin/bash'
+2018-12-24T03:19:20.8954036Z ##[debug]found: '/bin/bash'
+2018-12-24T03:19:20.8954792Z ##[debug]which '/bin/bash'
+2018-12-24T03:19:20.8955296Z ##[debug]found: '/bin/bash'
+2018-12-24T03:19:20.8959343Z ##[debug]/bin/bash arg: --noprofile
+2018-12-24T03:19:20.8959747Z ##[debug]/bin/bash arg: --norc
+2018-12-24T03:19:20.8960065Z ##[debug]/bin/bash arg: /home/example/myagent/_work/_temp/d8396d16-7bc6-4bf8-bc3f-efec456e2e7b.sh
+2018-12-24T03:19:20.8966762Z ##[debug]exec tool: /bin/bash
+2018-12-24T03:19:20.8967053Z ##[debug]arguments:
+2018-12-24T03:19:20.8967705Z ##[debug]   --noprofile
+2018-12-24T03:19:20.8968089Z ##[debug]   --norc
+2018-12-24T03:19:20.8968429Z ##[debug]   /home/example/myagent/_work/_temp/d8396d16-7bc6-4bf8-bc3f-efec456e2e7b.sh
+2018-12-24T03:19:20.8972905Z [command]/bin/bash --noprofile --norc /home/example/myagent/_work/_temp/d8396d16-7bc6-4bf8-bc3f-efec456e2e7b.sh
+2018-12-24T03:19:21.2943035Z === RUN   TestAccAzureRMAppServiceCustomHostnameBinding
+2018-12-24T03:19:21.2943517Z === RUN   TestAccAzureRMAppServiceCustomHostnameBinding/basic
+2018-12-24T03:19:21.2943786Z === RUN   TestAccAzureRMAppServiceCustomHostnameBinding/basic/basic
+2018-12-24T03:19:21.2944502Z === RUN   TestAccAzureRMAppServiceCustomHostnameBinding/basic/multiple
+2018-12-24T03:19:21.2945823Z --- PASS: TestAccAzureRMAppServiceCustomHostnameBinding (0.00s)
+2018-12-24T03:19:21.2947044Z     --- PASS: TestAccAzureRMAppServiceCustomHostnameBinding/basic (0.00s)
+2018-12-24T03:19:21.2947928Z         --- SKIP: TestAccAzureRMAppServiceCustomHostnameBinding/basic/basic (0.00s)
+2018-12-24T03:19:21.2948028Z             resource_arm_app_service_custom_hostname_binding_test.go:42: Skipping as "ARM_TEST_APP_SERVICE" is not specified
+2018-12-24T03:19:21.2948478Z         --- SKIP: TestAccAzureRMAppServiceCustomHostnameBinding/basic/multiple (0.00s)
+2018-12-24T03:19:21.2948569Z             resource_arm_app_service_custom_hostname_binding_test.go:80: Skipping as "ARM_TEST_APP_SERVICE" is not specified
+2018-12-24T03:19:21.2948660Z PASS
+2018-12-24T03:19:28.4132614Z === RUN   TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId
+2018-12-24T03:19:28.4133002Z === PAUSE TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId
+2018-12-24T03:19:28.4133075Z === CONT  TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId
+2018-12-24T03:19:28.4133187Z 2018/12/24 03:19:21 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.4133288Z 2018/12/24 03:19:21 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.4134026Z 2018/12/24 03:19:21 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.4134623Z 2018/12/24 03:19:25 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.4134699Z
+2018-12-24T03:19:28.4134890Z CREATE: azurerm_azuread_application.test
+2018-12-24T03:19:28.4135077Z   application_id:    "" => "<computed>"
+2018-12-24T03:19:28.4135660Z   homepage:          "" => "<computed>"
+2018-12-24T03:19:28.4135908Z   identifier_uris.#: "" => "<computed>"
+2018-12-24T03:19:28.4137058Z   name:              "" => "acctestspa7fada72e-96a9-ca6f-adb3-2e50f67975ac"
+2018-12-24T03:19:28.4137178Z   reply_urls.#:      "" => "<computed>"
+2018-12-24T03:19:28.4137293Z CREATE: azurerm_azuread_service_principal.test
+2018-12-24T03:19:28.4137387Z   application_id: "" => "<computed>" (forces new resource)
+2018-12-24T03:19:28.4137478Z   display_name:   "" => "<computed>"
+2018-12-24T03:19:28.4137590Z CREATE: azurerm_azuread_service_principal_password.test
+2018-12-24T03:19:28.4138115Z   end_date:             "" => "2020-01-01T01:02:03Z" (forces new resource)
+2018-12-24T03:19:28.4138465Z   key_id:               "" => "1ff9cdbb-ad4f-e472-db6c-79efb769b546" (forces new resource)
+2018-12-24T03:19:28.4138561Z   service_principal_id: "" => "<computed>" (forces new resource)
+2018-12-24T03:19:28.4138631Z   start_date:           "" => "<computed>" (forces new resource)
+2018-12-24T03:19:28.4138731Z   value:                "<sensitive>" => "<sensitive>" (forces new resource)
+2018-12-24T03:19:28.4138775Z
+2018-12-24T03:19:28.4139008Z STATE:
+2018-12-24T03:19:28.4139028Z
+2018-12-24T03:19:28.4139074Z <no state>
+2018-12-24T03:19:28.4139113Z 2018/12/24 03:19:25 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.4139157Z 2018/12/24 03:19:25 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.4139215Z 2018/12/24 03:19:25 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.4139261Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+2018-12-24T03:19:28.4139288Z
+2018-12-24T03:19:28.4139777Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4139863Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+2018-12-24T03:19:28.4139991Z
+2018-12-24T03:19:28.4140413Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4140492Z 2018/12/24 03:19:28 [WARN] Test: Executing destroy step
+2018-12-24T03:19:28.4140558Z 2018/12/24 03:19:28 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.4140584Z
+2018-12-24T03:19:28.4140620Z
+2018-12-24T03:19:28.4140639Z
+2018-12-24T03:19:28.4140667Z STATE:
+2018-12-24T03:19:28.4140694Z
+2018-12-24T03:19:28.4140739Z <no state>
+2018-12-24T03:19:28.4140955Z --- FAIL: TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId (3163.27s)
+2018-12-24T03:19:28.4141006Z     testing.go:538: Step 0 error: Error applying: 1 error(s) occurred:
+2018-12-24T03:19:28.4141059Z
+2018-12-24T03:19:28.4141095Z         * azurerm_azuread_application.test: 1 error(s) occurred:
+2018-12-24T03:19:28.4141130Z
+2018-12-24T03:19:28.4141687Z         * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4141747Z FAIL
+2018-12-24T03:19:28.4141794Z exit status 1
+2018-12-24T03:19:28.4192739Z === RUN   TestAccAzureRMActiveDirectoryServicePrincipal_basic
+2018-12-24T03:19:28.4193722Z === PAUSE TestAccAzureRMActiveDirectoryServicePrincipal_basic
+2018-12-24T03:19:28.4193858Z === CONT  TestAccAzureRMActiveDirectoryServicePrincipal_basic
+2018-12-24T03:19:28.4193999Z 2018/12/24 03:19:21 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.4194582Z 2018/12/24 03:19:21 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.4194757Z 2018/12/24 03:19:21 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.4194920Z 2018/12/24 03:19:25 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.4194980Z
+2018-12-24T03:19:28.4195086Z CREATE: azurerm_azuread_application.test
+2018-12-24T03:19:28.4195174Z   application_id:    "" => "<computed>"
+2018-12-24T03:19:28.4195298Z   homepage:          "" => "<computed>"
+2018-12-24T03:19:28.4195413Z   identifier_uris.#: "" => "<computed>"
+2018-12-24T03:19:28.4196147Z   name:              "" => "acctestspad4183b9b-acf8-4399-bc23-807a2743e6fd"
+2018-12-24T03:19:28.4196302Z   reply_urls.#:      "" => "<computed>"
+2018-12-24T03:19:28.4196391Z CREATE: azurerm_azuread_service_principal.test
+2018-12-24T03:19:28.4196683Z   application_id: "" => "<computed>" (forces new resource)
+2018-12-24T03:19:28.4196792Z   display_name:   "" => "<computed>"
+2018-12-24T03:19:28.4196849Z
+2018-12-24T03:19:28.4196924Z STATE:
+2018-12-24T03:19:28.4196976Z
+2018-12-24T03:19:28.4197069Z <no state>
+2018-12-24T03:19:28.4197165Z 2018/12/24 03:19:25 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.4197273Z 2018/12/24 03:19:25 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.4197395Z 2018/12/24 03:19:25 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.4197498Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+2018-12-24T03:19:28.4197560Z
+2018-12-24T03:19:28.4198616Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4198757Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+2018-12-24T03:19:28.4198833Z
+2018-12-24T03:19:28.4199852Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4199991Z 2018/12/24 03:19:28 [WARN] Test: Executing destroy step
+2018-12-24T03:19:28.4200072Z 2018/12/24 03:19:28 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.4200118Z
+2018-12-24T03:19:28.4200181Z
+2018-12-24T03:19:28.4200214Z
+2018-12-24T03:19:28.4200267Z STATE:
+2018-12-24T03:19:28.4200302Z
+2018-12-24T03:19:28.4200373Z <no state>
+2018-12-24T03:19:28.4200771Z --- FAIL: TestAccAzureRMActiveDirectoryServicePrincipal_basic (7.46s)
+2018-12-24T03:19:28.4200854Z     testing.go:538: Step 0 error: Error applying: 1 error(s) occurred:
+2018-12-24T03:19:28.4200940Z
+2018-12-24T03:19:28.4201002Z         * azurerm_azuread_application.test: 1 error(s) occurred:
+2018-12-24T03:19:28.4201066Z
+2018-12-24T03:19:28.4201895Z         * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4202180Z FAIL
+2018-12-24T03:19:28.4202262Z exit status 1
+2018-12-24T03:19:28.4510203Z === RUN   TestAccAzureRMActiveDirectoryApplication_complete
+2018-12-24T03:19:28.4510538Z === PAUSE TestAccAzureRMActiveDirectoryApplication_complete
+2018-12-24T03:19:28.4511015Z === CONT  TestAccAzureRMActiveDirectoryApplication_complete
+2018-12-24T03:19:28.4511282Z 2018/12/24 03:19:21 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.4511400Z 2018/12/24 03:19:21 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.4511579Z 2018/12/24 03:19:21 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.4511673Z 2018/12/24 03:19:25 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.4511779Z
+2018-12-24T03:19:28.4512294Z CREATE: azurerm_azuread_application.test
+2018-12-24T03:19:28.4512396Z   application_id:             "" => "<computed>"
+2018-12-24T03:19:28.4513376Z   homepage:                   "" => "https://homepage-302ea167-78da-4250-857e-fe496b6da7fc"
+2018-12-24T03:19:28.4513639Z   identifier_uris.#:          "0" => "1"
+2018-12-24T03:19:28.4514645Z   identifier_uris.0:          "" => "http://302ea167-78da-4250-857e-fe496b6da7fc.hashicorptest.com"
+2018-12-24T03:19:28.4515143Z   name:                       "" => "acctest302ea167-78da-4250-857e-fe496b6da7fc"
+2018-12-24T03:19:28.4515275Z   oauth2_allow_implicit_flow: "" => "true"
+2018-12-24T03:19:28.4515366Z   reply_urls.#:               "0" => "1"
+2018-12-24T03:19:28.4515875Z   reply_urls.0:               "" => "http://302ea167-78da-4250-857e-fe496b6da7fc.hashicorptest.com"
+2018-12-24T03:19:28.4515969Z
+2018-12-24T03:19:28.4516046Z STATE:
+2018-12-24T03:19:28.4516099Z
+2018-12-24T03:19:28.4516173Z <no state>
+2018-12-24T03:19:28.4516291Z 2018/12/24 03:19:25 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.4516396Z 2018/12/24 03:19:25 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.4516535Z 2018/12/24 03:19:25 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.4516649Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+2018-12-24T03:19:28.4516714Z
+2018-12-24T03:19:28.4517879Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4518030Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+2018-12-24T03:19:28.4518079Z
+2018-12-24T03:19:28.4519019Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4519171Z 2018/12/24 03:19:28 [WARN] Test: Executing destroy step
+2018-12-24T03:19:28.4519267Z 2018/12/24 03:19:28 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.4519315Z
+2018-12-24T03:19:28.4519351Z
+2018-12-24T03:19:28.4519384Z
+2018-12-24T03:19:28.4519454Z STATE:
+2018-12-24T03:19:28.4519492Z
+2018-12-24T03:19:28.4519542Z <no state>
+2018-12-24T03:19:28.4519985Z --- FAIL: TestAccAzureRMActiveDirectoryApplication_complete (6.95s)
+2018-12-24T03:19:28.4520081Z     testing.go:538: Step 0 error: Error applying: 1 error(s) occurred:
+2018-12-24T03:19:28.4520152Z
+2018-12-24T03:19:28.4520236Z         * azurerm_azuread_application.test: 1 error(s) occurred:
+2018-12-24T03:19:28.4520472Z
+2018-12-24T03:19:28.4521290Z         * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.4521437Z FAIL
+2018-12-24T03:19:28.4521499Z exit status 1
+2018-12-24T03:19:28.5491186Z === RUN   TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants
+2018-12-24T03:19:28.5491479Z === PAUSE TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants
+2018-12-24T03:19:28.5491585Z === CONT  TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants
+2018-12-24T03:19:28.5491660Z 2018/12/24 03:19:21 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.5491765Z 2018/12/24 03:19:21 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.5491879Z 2018/12/24 03:19:21 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.5492146Z 2018/12/24 03:19:25 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.5492209Z
+2018-12-24T03:19:28.5492268Z CREATE: azurerm_azuread_application.test
+2018-12-24T03:19:28.5492333Z   application_id:             "" => "<computed>"
+2018-12-24T03:19:28.5492408Z   available_to_other_tenants: "" => "true"
+2018-12-24T03:19:28.5492474Z   homepage:                   "" => "<computed>"
+2018-12-24T03:19:28.5492534Z   identifier_uris.#:          "0" => "1"
+2018-12-24T03:19:28.5493409Z   identifier_uris.0:          "" => "https://196b15b4-ed17-4c2d-a05c-f5a6f48436b6.hashicorptest.com"
+2018-12-24T03:19:28.5493948Z   name:                       "" => "acctest196b15b4-ed17-4c2d-a05c-f5a6f48436b6"
+2018-12-24T03:19:28.5494227Z   reply_urls.#:               "" => "<computed>"
+2018-12-24T03:19:28.5494302Z
+2018-12-24T03:19:28.5494392Z STATE:
+2018-12-24T03:19:28.5494437Z
+2018-12-24T03:19:28.5494507Z <no state>
+2018-12-24T03:19:28.5494608Z 2018/12/24 03:19:25 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.5494719Z 2018/12/24 03:19:25 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.5494820Z 2018/12/24 03:19:25 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.5494942Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+2018-12-24T03:19:28.5495009Z
+2018-12-24T03:19:28.5496088Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.5496321Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+2018-12-24T03:19:28.5496393Z
+2018-12-24T03:19:28.5497819Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.5497934Z 2018/12/24 03:19:28 [WARN] Test: Executing destroy step
+2018-12-24T03:19:28.5498033Z 2018/12/24 03:19:28 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.5498082Z
+2018-12-24T03:19:28.5498119Z
+2018-12-24T03:19:28.5498153Z
+2018-12-24T03:19:28.5498227Z STATE:
+2018-12-24T03:19:28.5498260Z
+2018-12-24T03:19:28.5498310Z <no state>
+2018-12-24T03:19:28.5498700Z --- FAIL: TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants (7.00s)
+2018-12-24T03:19:28.5498965Z     testing.go:538: Step 0 error: Error applying: 1 error(s) occurred:
+2018-12-24T03:19:28.5499029Z
+2018-12-24T03:19:28.5499122Z         * azurerm_azuread_application.test: 1 error(s) occurred:
+2018-12-24T03:19:28.5499185Z
+2018-12-24T03:19:28.5500011Z         * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.5500144Z FAIL
+2018-12-24T03:19:28.5500199Z exit status 1
+2018-12-24T03:19:28.6316149Z === RUN   TestAccAzureRMActiveDirectoryApplication_update
+2018-12-24T03:19:28.6316437Z === PAUSE TestAccAzureRMActiveDirectoryApplication_update
+2018-12-24T03:19:28.6316593Z === CONT  TestAccAzureRMActiveDirectoryApplication_update
+2018-12-24T03:19:28.6316733Z 2018/12/24 03:19:22 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.6317201Z 2018/12/24 03:19:22 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.6317337Z 2018/12/24 03:19:22 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.6317440Z 2018/12/24 03:19:25 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.6317501Z
+2018-12-24T03:19:28.6317598Z CREATE: azurerm_azuread_application.test
+2018-12-24T03:19:28.6317682Z   application_id:    "" => "<computed>"
+2018-12-24T03:19:28.6317763Z   homepage:          "" => "<computed>"
+2018-12-24T03:19:28.6318243Z   identifier_uris.#: "" => "<computed>"
+2018-12-24T03:19:28.6319077Z   name:              "" => "acctestf59cc989-2580-4cbd-a42a-3e285509346e"
+2018-12-24T03:19:28.6319161Z   reply_urls.#:      "" => "<computed>"
+2018-12-24T03:19:28.6319232Z
+2018-12-24T03:19:28.6319283Z STATE:
+2018-12-24T03:19:28.6319333Z
+2018-12-24T03:19:28.6319407Z <no state>
+2018-12-24T03:19:28.6319476Z 2018/12/24 03:19:25 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.6319571Z 2018/12/24 03:19:25 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.6319665Z 2018/12/24 03:19:25 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.6319742Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+2018-12-24T03:19:28.6319790Z
+2018-12-24T03:19:28.6321021Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.6321176Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+2018-12-24T03:19:28.6321248Z
+2018-12-24T03:19:28.6322194Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.6322349Z 2018/12/24 03:19:28 [WARN] Test: Executing destroy step
+2018-12-24T03:19:28.6322419Z 2018/12/24 03:19:28 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.6322463Z
+2018-12-24T03:19:28.6322497Z
+2018-12-24T03:19:28.6322545Z
+2018-12-24T03:19:28.6322597Z STATE:
+2018-12-24T03:19:28.6322631Z
+2018-12-24T03:19:28.6322686Z <no state>
+2018-12-24T03:19:28.6323174Z --- FAIL: TestAccAzureRMActiveDirectoryApplication_update (7.05s)
+2018-12-24T03:19:28.6323450Z     testing.go:538: Step 0 error: Error applying: 1 error(s) occurred:
+2018-12-24T03:19:28.6323537Z
+2018-12-24T03:19:28.6323606Z         * azurerm_azuread_application.test: 1 error(s) occurred:
+2018-12-24T03:19:28.6323690Z
+2018-12-24T03:19:28.6325018Z         * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.6325212Z FAIL
+2018-12-24T03:19:28.6325314Z exit status 1
+2018-12-24T03:19:28.6644854Z === RUN   TestAccAzureRMActiveDirectoryApplication_basic
+2018-12-24T03:19:28.6645024Z === PAUSE TestAccAzureRMActiveDirectoryApplication_basic
+2018-12-24T03:19:28.6645209Z === CONT  TestAccAzureRMActiveDirectoryApplication_basic
+2018-12-24T03:19:28.6645338Z 2018/12/24 03:19:22 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.6645685Z 2018/12/24 03:19:22 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.6645787Z 2018/12/24 03:19:22 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.6645878Z 2018/12/24 03:19:25 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.6645977Z
+2018-12-24T03:19:28.6646059Z CREATE: azurerm_azuread_application.test
+2018-12-24T03:19:28.6646146Z   application_id:    "" => "<computed>"
+2018-12-24T03:19:28.6646252Z   homepage:          "" => "<computed>"
+2018-12-24T03:19:28.6646337Z   identifier_uris.#: "" => "<computed>"
+2018-12-24T03:19:28.6647049Z   name:              "" => "acctestb11f4454-4966-430e-b9c8-a8ca700f7971"
+2018-12-24T03:19:28.6647182Z   reply_urls.#:      "" => "<computed>"
+2018-12-24T03:19:28.6647232Z
+2018-12-24T03:19:28.6647306Z STATE:
+2018-12-24T03:19:28.6647355Z
+2018-12-24T03:19:28.6647469Z <no state>
+2018-12-24T03:19:28.6647750Z 2018/12/24 03:19:25 Testing if Service Principal / Client Certificate is applicable for Authentication..
+2018-12-24T03:19:28.6647844Z 2018/12/24 03:19:25 Testing if Service Principal / Client Secret is applicable for Authentication..
+2018-12-24T03:19:28.6647946Z 2018/12/24 03:19:25 Using Service Principal / Client Secret for Authentication
+2018-12-24T03:19:28.6648027Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+2018-12-24T03:19:28.6648071Z
+2018-12-24T03:19:28.6649030Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.6649156Z 2018/12/24 03:19:28 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+2018-12-24T03:19:28.6649255Z
+2018-12-24T03:19:28.6650091Z * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.6650441Z 2018/12/24 03:19:28 [WARN] Test: Executing destroy step
+2018-12-24T03:19:28.6650519Z 2018/12/24 03:19:28 [WARN] Test: Step plan: DIFF:
+2018-12-24T03:19:28.6650567Z
+2018-12-24T03:19:28.6650625Z
+2018-12-24T03:19:28.6650661Z
+2018-12-24T03:19:28.6650718Z STATE:
+2018-12-24T03:19:28.6650757Z
+2018-12-24T03:19:28.6650831Z <no state>
+2018-12-24T03:19:28.6651226Z --- FAIL: TestAccAzureRMActiveDirectoryApplication_basic (7.14s)
+2018-12-24T03:19:28.6651316Z     testing.go:538: Step 0 error: Error applying: 1 error(s) occurred:
+2018-12-24T03:19:28.6651576Z
+2018-12-24T03:19:28.6651649Z         * azurerm_azuread_application.test: 1 error(s) occurred:
+2018-12-24T03:19:28.6651728Z
+2018-12-24T03:19:28.6652633Z         * azurerm_azuread_application.test: graphrbac.ApplicationsClient#Create: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="Unknown" Message="Unknown service error" Details=[{"odata.error":{"code":"Authorization_RequestDenied","message":{"lang":"en","value":"Insufficient privileges to complete the operation."}}}]
+2018-12-24T03:19:28.6652743Z FAIL
+2018-12-24T03:19:28.6652824Z exit status 1
+2018-12-24T13:17:25.5789086Z ##[debug]Re-evaluate condition on job cancellation for step: 'Example Step'.
+2018-12-24T13:17:25.6138477Z ##[error]The operation was canceled.
+2018-12-24T13:17:25.6151597Z ##[debug]System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at Microsoft.VisualStudio.Services.Agent.Util.ProcessInvoker.ExecuteAsync(String workingDirectory, String fileName, String arguments, IDictionary`2 environment, Boolean requireExitCodeZero, Encoding outputEncoding, Boolean killProcessOnCancel, IList`1 contentsToStandardIn, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.Services.Agent.ProcessInvokerWrapper.ExecuteAsync(String workingDirectory, String fileName, String arguments, IDictionary`2 environment, Boolean requireExitCodeZero, Encoding outputEncoding, Boolean killProcessOnCancel, IList`1 contentsToStandardIn, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.Services.Agent.Worker.Handlers.DefaultStepHost.ExecuteAsync(String workingDirectory, String fileName, String arguments, IDictionary`2 environment, Boolean requireExitCodeZero, Encoding outputEncoding, Boolean killProcessOnCancel, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.Services.Agent.Worker.Handlers.NodeHandler.RunAsync()
+   at Microsoft.VisualStudio.Services.Agent.Worker.TaskRunner.RunAsync()
+   at Microsoft.VisualStudio.Services.Agent.Worker.StepsRunner.RunStepAsync(IStep step, CancellationToken jobCancellationToken)
+2018-12-24T13:17:25.6153075Z ##[section]Finishing: Example Step
