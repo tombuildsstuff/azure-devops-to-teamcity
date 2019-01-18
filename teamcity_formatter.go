@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 /*
@@ -36,9 +37,11 @@ func FormatForTeamCity(input []BuildOutput) error {
 
 		if !test.Passed {
 			fmt.Println(fmt.Sprintf("##teamcity[testFailed name='%s' message='Test ended in failure'", test.TestName))
-		} else {
-			fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%.2fs']", test.TestName, test.Duration))
 		}
+
+		// test durations are seconds in ADO but TC wants in milliseconds
+		duration := int(test.Duration * float64(time.Second))
+		fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%d']", test.TestName, duration))
 	}
 
 	fmt.Println("##teamcity[testSuiteFinished name='Tests']")
