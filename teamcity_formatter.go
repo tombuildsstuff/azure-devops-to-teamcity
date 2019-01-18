@@ -36,12 +36,10 @@ func FormatForTeamCity(input []BuildOutput) error {
 		//fmt.Println(fmt.Sprintf("##teamcity[testStdOut name='%s' out='%s']", test.TestName, stdout))
 
 		if !test.Passed {
-			fmt.Println(fmt.Sprintf("##teamcity[testFailed name='%s' message='Test ended in failure'", test.TestName))
+			fmt.Println(fmt.Sprintf("##teamcity[testFailed name='%s' message='Test ended in failure']", test.TestName))
 		}
 
-		// test durations are seconds in ADO but TC wants in milliseconds
-		duration := int(test.Duration * float64(time.Second))
-		fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%d']", test.TestName, duration))
+		fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%d']", test.TestName, test.Duration.Round(time.Millisecond)))
 	}
 
 	fmt.Println("##teamcity[testSuiteFinished name='Tests']")

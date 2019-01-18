@@ -3,6 +3,7 @@ package main
 import (
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestParseBuildLog(t *testing.T) {
@@ -10,7 +11,7 @@ func TestParseBuildLog(t *testing.T) {
 		{
 			TestName: "TestAccAzureRMAppServiceCustomHostnameBinding",
 			Passed:   true,
-			Duration: 0.00,
+			Duration: 0 * time.Millisecond,
 			StdOut: `=== RUN   TestAccAzureRMAppServiceCustomHostnameBinding
 === RUN   TestAccAzureRMAppServiceCustomHostnameBinding/basic
 === RUN   TestAccAzureRMAppServiceCustomHostnameBinding/basic/basic
@@ -27,7 +28,7 @@ PASS
 		{
 			TestName: "TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId",
 			Passed:   false,
-			Duration: 3163.27,
+			Duration: 3163270 * time.Millisecond,
 			StdOut: `=== RUN   TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId
 === PAUSE TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId
 === CONT  TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId
@@ -84,7 +85,7 @@ FAIL
 		{
 			TestName: "TestAccAzureRMActiveDirectoryServicePrincipal_basic",
 			Passed:   false,
-			Duration: 7.46,
+			Duration: 7460 * time.Millisecond,
 			StdOut: `=== RUN   TestAccAzureRMActiveDirectoryServicePrincipal_basic
 === PAUSE TestAccAzureRMActiveDirectoryServicePrincipal_basic
 === CONT  TestAccAzureRMActiveDirectoryServicePrincipal_basic
@@ -135,7 +136,7 @@ FAIL
 		{
 			TestName: "TestAccAzureRMActiveDirectoryApplication_complete",
 			Passed:   false,
-			Duration: 6.95,
+			Duration: 6950 * time.Millisecond,
 			StdOut: `=== RUN   TestAccAzureRMActiveDirectoryApplication_complete
 === PAUSE TestAccAzureRMActiveDirectoryApplication_complete
 === CONT  TestAccAzureRMActiveDirectoryApplication_complete
@@ -186,7 +187,7 @@ FAIL
 		{
 			TestName: "TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants",
 			Passed:   false,
-			Duration: 7.00,
+			Duration: 7000 * time.Millisecond,
 			StdOut: `=== RUN   TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants
 === PAUSE TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants
 === CONT  TestAccAzureRMActiveDirectoryApplication_availableToOtherTenants
@@ -236,7 +237,7 @@ FAIL
 		{
 			TestName: "TestAccAzureRMActiveDirectoryApplication_update",
 			Passed:   false,
-			Duration: 7.05,
+			Duration: 7050 * time.Millisecond,
 			StdOut: `=== RUN   TestAccAzureRMActiveDirectoryApplication_update
 === PAUSE TestAccAzureRMActiveDirectoryApplication_update
 === CONT  TestAccAzureRMActiveDirectoryApplication_update
@@ -284,7 +285,7 @@ FAIL
 		{
 			TestName: "TestAccAzureRMActiveDirectoryApplication_basic",
 			Passed:   false,
-			Duration: 7.14,
+			Duration: 7140 * time.Millisecond,
 			StdOut: `=== RUN   TestAccAzureRMActiveDirectoryApplication_basic
 === PAUSE TestAccAzureRMActiveDirectoryApplication_basic
 === CONT  TestAccAzureRMActiveDirectoryApplication_basic
@@ -339,7 +340,7 @@ FAIL
 		t.Fatalf("Expected %d items but got %d", len(expected), len(*actual))
 	}
 
-	for i, _ := range expected {
+	for i := range expected {
 		expectedValue := expected[i]
 		actualValue := (*actual)[i]
 
@@ -352,7 +353,7 @@ FAIL
 		}
 
 		if expectedValue.Duration != actualValue.Duration {
-			t.Fatalf("Expected Test Name to be %.2f but got %.2f for %q", expectedValue.Duration, actualValue.Duration, expectedValue.TestName)
+			t.Fatalf("Expected Test Duration to be %d but got %d for %q", expectedValue.Duration, actualValue.Duration, expectedValue.TestName)
 		}
 
 		// compare the stdout's line by line by trimming the whitespace around then

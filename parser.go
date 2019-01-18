@@ -6,14 +6,14 @@ import (
 	"log"
 	"os"
 	"regexp"
-	"strconv"
 	"strings"
+	"time"
 )
 
 type BuildOutput struct {
 	TestName string
 	Passed   bool
-	Duration float64
+	Duration time.Duration
 	StdOut   string
 }
 
@@ -29,7 +29,7 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 
 	currentTestName := ""
 	currentStdOut := ""
-	currentTestDuration := 0.00
+	var currentTestDuration *time.Duration
 
 	reachedTests := false
 	for scanner.Scan() {
@@ -92,23 +92,29 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 
 		// if this line contains the run time for the test then parse that out
 		// --- [PASS|FAIL]{4}: [A-Za-z0-9_]{1,} \((\d){1,}.(\d){1,}s\)
-		durationRegex := fmt.Sprintf("--- [PASS|FAIL]{4}: [A-Za-z0-9_]{1,} \\((\\d+){1,}\\.(\\d+){1,}[s]\\)")
+		durationRegex := fmt.Sprintf("--- [PASS|FAIL]{4}: [A-Za-z0-9_]{1,} \\((\\d+){1,}")
 		match, err := regexp.MatchString(durationRegex, lineWithoutDate)
 		if match {
+
+			//  TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId (3163.27s)
+
 			// parse the duration out
 			name := lineWithoutDate
 			name = strings.Replace(name, "--- FAIL:", "", 1)
 			name = strings.Replace(name, "--- PASS:", "", 1)
 			name = strings.Replace(name, currentTestName, "", 1)
 			name = strings.Replace(name, "(", "", 1)
-			name = strings.Replace(name, "s)", "", 1)
+			name = strings.Replace(name, ")", "", 1)
 			name = strings.TrimSpace(name)
-			f, err := strconv.ParseFloat(name, 2)
+
+			log.Printf("[DEBUG] Duration is %q", name)
+
+			duration, err := time.ParseDuration(name)
 			if err != nil {
 				return nil, fmt.Errorf("Error parsing duration for %s: %s", currentTestName, err)
 			}
 
-			currentTestDuration = f
+			currentTestDuration = &duration
 		}
 
 		// the end of a Test either ends with a PASS or a FAIL
@@ -118,14 +124,14 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 				TestName: currentTestName,
 				StdOut:   currentStdOut,
 				Passed:   currentTestPassed,
-				Duration: currentTestDuration,
+				Duration: *currentTestDuration,
 			}
 			outputs = append(outputs, output)
 
 			// then reset the values
 			currentTestName = ""
 			currentStdOut = ""
-			currentTestDuration = 0.00
+			currentTestDuration = nil
 		}
 	}
 
