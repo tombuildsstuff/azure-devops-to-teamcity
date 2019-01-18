@@ -22,7 +22,8 @@ func main() {
 		panic(err)
 	}
 
-	firstBuildId := (*builds)[0].Id
+	firstBuild := (*builds)[0]
+	firstBuildId := firstBuild.Id
 	buildLog, err := client.GetBuildLog(firstBuildId, *buildStepNumber)
 	if err != nil {
 		panic(err)
@@ -46,7 +47,7 @@ func main() {
 		panic(err)
 	}
 
-	err = FormatForTeamCity(*outputs)
+	err = FormatForTeamCity(firstBuild.BuildNumber, *outputs)
 	if err != nil {
 		panic(err)
 	}

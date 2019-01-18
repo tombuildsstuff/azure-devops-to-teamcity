@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 /*
@@ -17,7 +18,9 @@ import (
 	##teamcity[testFinished name='className.testName' duration='50']
 */
 
-func FormatForTeamCity(input []BuildOutput) error {
+func FormatForTeamCity(buildNumber string, input []BuildOutput) error {
+
+	fmt.Println(fmt.Sprintf("##teamcity[buildNumber '%s-%s']", buildNumber, time.Now().Format("2006-01-02")))
 
 	fmt.Println("##teamcity[testSuiteStarted name='Tests']")
 
