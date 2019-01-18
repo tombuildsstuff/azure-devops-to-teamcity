@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"time"
 )
 
 /*
@@ -39,7 +38,7 @@ func FormatForTeamCity(input []BuildOutput) error {
 			fmt.Println(fmt.Sprintf("##teamcity[testFailed name='%s' message='Test ended in failure']", test.TestName))
 		}
 
-		fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%d']", test.TestName, test.Duration.Round(time.Millisecond)))
+		fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%d']", test.TestName, int64(test.Duration.Seconds()*float64(1000))))
 	}
 
 	fmt.Println("##teamcity[testSuiteFinished name='Tests']")

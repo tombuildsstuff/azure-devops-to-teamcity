@@ -107,8 +107,6 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 			name = strings.Replace(name, ")", "", 1)
 			name = strings.TrimSpace(name)
 
-			log.Printf("[DEBUG] Duration is %q", name)
-
 			duration, err := time.ParseDuration(name)
 			if err != nil {
 				return nil, fmt.Errorf("Error parsing duration for %s: %s", currentTestName, err)
