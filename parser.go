@@ -13,6 +13,7 @@ import (
 type BuildOutput struct {
 	TestName string
 	Passed   bool
+	Skipped  bool
 	Duration time.Duration
 	StdOut   string
 }
@@ -28,6 +29,7 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 	scanner := bufio.NewScanner(file)
 
 	currentTestName := ""
+	currentTestSkipped := false
 	currentStdOut := ""
 	var currentTestDuration *time.Duration
 
@@ -91,21 +93,25 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 		// then we can capture the stderr
 
 		// if this line contains the run time for the test then parse that out
-		// --- [PASS|FAIL]{4}: [A-Za-z0-9_]{1,} \((\d){1,}.(\d){1,}s\)
-		durationRegex := fmt.Sprintf("--- [PASS|FAIL]{4}: [A-Za-z0-9_]{1,} \\((\\d+){1,}")
+		// --- [PASS|FAIL|SKIP]{4}: [A-Za-z0-9_]{1,} \((\d){1,}.(\d){1,}s\)
+		durationRegex := fmt.Sprintf("--- [PASS|FAIL|SKIP]{4}: [A-Za-z0-9_]{1,} \\((\\d+){1,}")
 		match, err := regexp.MatchString(durationRegex, lineWithoutDate)
 		if match {
-
 			//  TestAccAzureRMActiveDirectoryServicePrincipalPassword_customKeyId (3163.27s)
 
 			// parse the duration out
 			name := lineWithoutDate
 			name = strings.Replace(name, "--- FAIL:", "", 1)
+			name = strings.Replace(name, "--- SKIP:", "", 1)
 			name = strings.Replace(name, "--- PASS:", "", 1)
 			name = strings.Replace(name, currentTestName, "", 1)
 			name = strings.Replace(name, "(", "", 1)
 			name = strings.Replace(name, ")", "", 1)
 			name = strings.TrimSpace(name)
+
+			if strings.Contains(lineWithoutDate, "--- SKIP:") {
+				currentTestSkipped = true
+			}
 
 			duration, err := time.ParseDuration(name)
 			if err != nil {
@@ -122,6 +128,7 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 				TestName: currentTestName,
 				StdOut:   currentStdOut,
 				Passed:   currentTestPassed,
+				Skipped:  currentTestSkipped,
 				Duration: *currentTestDuration,
 			}
 			outputs = append(outputs, output)
@@ -130,6 +137,7 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 			currentTestName = ""
 			currentStdOut = ""
 			currentTestDuration = nil
+			currentTestSkipped = false
 		}
 	}
 

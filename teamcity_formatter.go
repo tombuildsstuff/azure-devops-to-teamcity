@@ -36,11 +36,16 @@ func FormatForTeamCity(buildNumber string, input []BuildOutput) error {
 
 		//fmt.Println(fmt.Sprintf("##teamcity[testStdOut name='%s' out='%s']", test.TestName, stdout))
 
-		if !test.Passed {
-			fmt.Println(fmt.Sprintf("##teamcity[testFailed name='%s' message='Test ended in failure']", test.TestName))
+		if test.Skipped {
+			fmt.Println(fmt.Sprintf("##teamcity[testIgnored name='%s' message='Test was Skipped']", test.TestName))
+			continue
 		}
 
-		fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%d']", test.TestName, int64(test.Duration.Seconds()*float64(1000))))
+		if !test.Passed {
+			fmt.Println(fmt.Sprintf("##teamcity[testFailed name='%s' message='Test ended in failure']", test.TestName))
+		} else {
+			fmt.Println(fmt.Sprintf("##teamcity[testFinished name='%s' duration='%d']", test.TestName, int64(test.Duration.Seconds()*float64(1000))))
+		}
 	}
 
 	fmt.Println("##teamcity[testSuiteFinished name='Tests']")
