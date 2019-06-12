@@ -58,7 +58,7 @@ func ParseBuildLog(fileName string) (*[]BuildOutput, error) {
 
 		lineWithoutDate := line[29:]
 
-		// if we havne't found the start of the tests then continue until we find one
+		// if we haven't found the start of the tests then continue until we find one
 		// === RUN   TestAccAzureRMAppServiceCustomHostnameBinding
 		if !reachedTests && !strings.HasPrefix(lineWithoutDate, "=== RUN") {
 			continue

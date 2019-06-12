@@ -17,22 +17,32 @@ import (
 	##teamcity[testFinished name='className.testName' duration='50']
 */
 
-func FormatForTeamCity(buildNumber string, input []BuildOutput) error {
+func escapeString(input string) string {
+	// from https://confluence.jetbrains.com/display/TCD18/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-Escapedvalues
+	out := strings.Replace(input, "|", "||", -1)
+	out = strings.Replace(out, "'", "|'", -1)
+	out = strings.Replace(out, "[", "|[", -1)
+	out = strings.Replace(out, "]", "|]", -1)
+	out = strings.Replace(out, "\n", "|n", -1)
+	return out
+}
 
+func OutputFailureForTeamCity(message string) error {
+	out := escapeString(message)
+	fmt.Println(fmt.Sprintf("##teamcity[message text='Build Failed' errorDetails='%q' status='ERROR']", out))
+	return nil
+}
+
+func FormatForTeamCity(buildNumber string, input []BuildOutput) error {
 	fmt.Println(fmt.Sprintf("##teamcity[buildNumber '%s']", buildNumber))
 
 	fmt.Println("##teamcity[testSuiteStarted name='Tests']")
 
 	for _, test := range input {
-		// from https://confluence.jetbrains.com/display/TCD18/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-Escapedvalues
-		stdout := strings.Replace(test.StdOut, "|", "||", -1)
-		stdout = strings.Replace(stdout, "'", "|'", -1)
-		stdout = strings.Replace(stdout, "[", "|[", -1)
-		stdout = strings.Replace(stdout, "]", "|]", -1)
-		stdout = strings.Replace(stdout, "\n", "|n", -1)
+		stdout := escapeString(test.StdOut)
 
 		fmt.Println(fmt.Sprintf("##teamcity[testStarted name='%s' captureStandardOutput='true']", test.TestName))
-		fmt.Println(test.StdOut)
+		fmt.Println(stdout)
 
 		//fmt.Println(fmt.Sprintf("##teamcity[testStdOut name='%s' out='%s']", test.TestName, stdout))
 

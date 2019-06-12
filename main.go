@@ -22,6 +22,11 @@ func main() {
 		panic(err)
 	}
 
+	if builds == nil || len(*builds) == 0 {
+		OutputFailureForTeamCity("No builds were found!")
+		return
+	}
+
 	firstBuild := (*builds)[0]
 	firstBuildId := firstBuild.Id
 	buildLog, err := client.GetBuildLog(firstBuildId, *buildStepNumber)
